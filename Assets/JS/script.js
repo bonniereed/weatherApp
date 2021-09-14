@@ -1,8 +1,7 @@
 var userFormEl = document.querySelector("#user-form");
-var languageButtonsEl = document.querySelector("#language-buttons");
 var nameInputEl = document.querySelector("#username");
-var repoContainerEl = document.querySelector("#repos-container");
-var repoSearchTerm = document.querySelector("#repo-search-term");
+var weatherContainerEl = document.querySelector("#weather-container");
+var weatherSearchTerm = document.querySelector("#weather-search-term");
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -12,26 +11,16 @@ var formSubmitHandler = function (event) {
   if (username) {
     getUserRepos(username);
 
-    repoContainerEl.textContent = "";
+    weatherContainerEl.textContent = "";
     nameInputEl.value = "";
   } else {
-    alert("Please enter a GitHub username");
-  }
-};
-
-var buttonClickHandler = function (event) {
-  var language = event.target.getAttribute("data-language");
-
-  if (language) {
-    getFeaturedRepos(language);
-
-    repoContainerEl.textContent = "";
+    alert("Please enter location");
   }
 };
 
 var getEndUserLocation = function (user) {
   var apiUrl =
-    "hhttps://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}" +
+    "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}" +
     user +
     "/repos";
 
@@ -39,69 +28,42 @@ var getEndUserLocation = function (user) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          displayRepos(data, user);
+          displayWeather(data, user);
         });
       } else {
         alert("Error: " + response.statusText);
       }
     })
     .catch(function (error) {
-      alert("Unable to connect to GitHub");
+      alert("Unable to connect");
     });
 };
 
-var getFeaturedRepos = function (language) {
-  var apiUrl =
-    "https://api.github.com/search/repositories?q=" +
-    language +
-    "+is:featured&sort=help-wanted-issues";
-
-  fetch(apiUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        displayRepos(data.items, language);
-      });
-    } else {
-      alert("Error: " + response.statusText);
-    }
-  });
-};
-
-var displayRepos = function (repos, searchTerm) {
+var displayWeather = function (repos, searchTerm) {
   if (repos.length === 0) {
-    repoContainerEl.textContent = "No repositories found.";
+    weatherContainerEl.textContent = "No repositories found.";
     return;
   }
 
-  repoSearchTerm.textContent = searchTerm;
+  weatherSearchTerm.textContent = searchTerm;
 
   for (var i = 0; i < repos.length; i++) {
-    var repoName = repos[i].owner.login + "/" + repos[i].name;
+    var weatherEntry = repos[i].owner.login + "/" + repos[i].name;
 
     var repoEl = document.createElement("div");
     repoEl.classList = "list-item flex-row justify-space-between align-center";
 
-    var titleEl = document.createElement("span");
-    titleEl.textContent = repoName;
+    var weatherEl = document.createElement("card");
+    titleEl.textContent = weatherEntry;
 
-    repoEl.appendChild(titleEl);
+    weatherEl.appendChild(weatherEl);
 
-    var statusEl = document.createElement("span");
+    var statusEl = document.createElement("card");
     statusEl.classList = "flex-row align-center";
 
-    if (repos[i].open_issues_count > 0) {
-      statusEl.innerHTML =
-        "<i class='fas fa-times status-icon icon-danger'></i>" +
-        repos[i].open_issues_count +
-        " issue(s)";
-    } else {
-      statusEl.innerHTML =
-        "<i class='fas fa-check-square status-icon icon-success'></i>";
-    }
+    weatherEl.appendChild(statusEl);
 
-    repoEl.appendChild(statusEl);
-
-    repoContainerEl.appendChild(repoEl);
+    weatherContainerEl.appendChild(repoEl);
   }
 };
 

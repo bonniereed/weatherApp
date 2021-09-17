@@ -1,6 +1,7 @@
+//
 var weatherFormEl = document.querySelector("#weather-form");
 var weatherInputEl = document.querySelector("#weather");
-var weatherContainerEl = document.querySelector("#weather-container");
+var weatherContainerEl = document.querySelector(".weather-container");
 var weatherSearchTerm = document.querySelector("#weather-search-term");
 var key = `540f9a4f911b73e2656f8cb8a4cc7555`;
 var url = `https://api.openweathermap.org/data/2.5/`;
@@ -12,17 +13,8 @@ var time;
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
-
-  var weather = weatherInputEl.value.trim();
-
-  if (weather) {
-    getUserRepos(weather);
-
-    weatherContainerEl.textContent = "";
-    nameInputEl.value = "";
-  } else {
-    alert("Please enter location");
-  }
+  getWeatherLocation(weatherInputEl.value.trim());
+  displayWeather();
 };
 
 function getWeatherLocation(city) {
@@ -61,75 +53,49 @@ function getWeatherInfo() {
     });
 }
 
-// var getWeatherLocation = function (city) {
-//   var apiKey = `540f9a4f911b73e2656f8cb8a4cc7555`;
-//   var apiUrl = `api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-//   fetch(apiUrl, {
-//     method: "GET",
-//   })
-//     .then((response) => {
-//       console.log(response);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//   fetch(apiUrl)
-//     .then(function (response) {
-//       if (response.ok) {
-//         response.json().then(function (data) {
-//           displayWeather(data, weather);
-//         });
-//       } else {
-//         alert("Error: " + response.statusText);
-//       }
-//     })
-//     .catch(function (error) {
-//       alert("Unable to connect");
-//     });
+function displayWeather() {
+  // create a new div element
+  const newDiv = document.createElement("div");
+
+  // and give it some content
+  const newContent = weatherContainerEl.createTextNode(
+    "Hi there and greetings!"
+  );
+
+  // add the text node to the newly created div
+  newDiv.appendChild(newContent);
+
+  // add the newly created element and its content into the DOM
+  const currentDiv = document.getElementById("weather-container");
+  document.body.insertBefore(newDiv, currentDiv);
+}
+
+// var displayWeather = function (weatherLocation, searchTerm) {
+//   if (weatherLocation.length === 0) {
+//     weatherContainerEl.textContent = "Nothing to be found.";
+//     return;
+//   }
+
+//   weatherSearchTerm.textContent = searchTerm;
+
+//   for (var i = 0; i < repos.length; i++) {
+//     // var weatherEntry = repos[i].owner.login + "/" + repos[i].name;
+
+//     weatherContainerEl.document.createElement("card");
+//     weatherContainerEl.classList =
+//       "list-item flex-row justify-space-between align-center";
+//     weatherContainerEl.textContent = `UV Index is:${city_of_choice.current.uvi} /n `;
+
+//     var weatherEl = document.createElement("card");
+//     weatherContainerEl.textContent = weatherEntry;
+
+//     var statusEl = document.createElement("card");
+//     statusEl.classList = "flex-row align-center";
+
+//     weatherEl.appendChild(statusEl);
+
+//     weatherContainerEl.appendChild(repoEl);
+//   }
 // };
-// fetch(apiUrl)
-//   .then(function (response) {
-//     return response.json(); // pass the data as promise to next then block
-//   })
-//   .then(function (data) {
-//     //pull city ID out
-
-//     return fetch("one call weather api call" + rocketId); // make a 2nd request and return a promise
-//   })
-//   .then(function (response) {
-//     return response.json(); //this response is the one with full data
-//   })
-//   .catch(function (error) {
-//     console.log("Request failed", error);
-//   });
-// };
-
-var displayWeather = function (weatherLocation, searchTerm) {
-  if (weatherLocation.length === 0) {
-    weatherContainerEl.textContent = "Nothing to be found.";
-    return;
-  }
-
-  weatherSearchTerm.textContent = searchTerm;
-
-  for (var i = 0; i < repos.length; i++) {
-    var weatherEntry = repos[i].owner.login + "/" + repos[i].name;
-
-    var repoEl = document.createElement("div");
-    repoEl.classList = "list-item flex-row justify-space-between align-center";
-
-    var weatherEl = document.createElement("card");
-    titleEl.textContent = weatherEntry;
-
-    weatherEl.appendChild(weatherEl);
-
-    var statusEl = document.createElement("card");
-    statusEl.classList = "flex-row align-center";
-
-    weatherEl.appendChild(statusEl);
-
-    weatherContainerEl.appendChild(repoEl);
-  }
-};
 
 weatherFormEl.addEventListener("submit", formSubmitHandler);

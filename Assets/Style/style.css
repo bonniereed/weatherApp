@@ -92,17 +92,17 @@ p {
   box-shadow: 2px 2px var(--dark);
 }
 
-.hero {
+.weath {
   padding: 3% 4%;
   background-color: var(--dark);
   color: var(--primary);
 }
 
-.hero p {
+.weath p {
   max-width: 75%;
 }
 
-.app-title {
+.appTitle {
   font-size: 3rem;
   background-color: var(--primary);
   font-family: "Fuggles", cursive;

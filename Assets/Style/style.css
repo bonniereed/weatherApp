@@ -1,7 +1,7 @@
 :root {
-  --primary: #f7dbf0;
+  --primary: #c4aee2;
   --secondary: #beaee2;
-  --tertiary: #fefbf3;
+  --tertiary: #6151be;
   --light-dark: #333456;
   --dark: #060930;
   --border-radius: 0.3rem;
@@ -13,9 +13,9 @@
 
 body {
   background-color: var(--primary);
+  font-family: "Glory", sans-serif;
   margin: 0;
   padding: 0;
-  font-family: "IBM Plex Sans", sans-serif;
   color: var(--dark);
   line-height: 1.5;
   font-size: 16px;
@@ -105,6 +105,7 @@ p {
 .app-title {
   font-size: 3rem;
   background-color: var(--primary);
+  font-family: "Fuggles", cursive;
   color: var(--dark);
   padding: 0 10px;
   display: inline-block;

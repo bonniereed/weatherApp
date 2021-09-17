@@ -1,15 +1,15 @@
-var userFormEl = document.querySelector("#user-form");
-var nameInputEl = document.querySelector("#username");
+var weatherFormEl = document.querySelector("#weather-form");
+var weatherInputEl = document.querySelector("#weather");
 var weatherContainerEl = document.querySelector("#weather-container");
 var weatherSearchTerm = document.querySelector("#weather-search-term");
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
-  var username = nameInputEl.value.trim();
+  var weather = weatherInputEl.value.trim();
 
-  if (username) {
-    getUserRepos(username);
+  if (weather) {
+    getUserRepos(weather);
 
     weatherContainerEl.textContent = "";
     nameInputEl.value = "";
@@ -20,9 +20,7 @@ var formSubmitHandler = function (event) {
 
 var getEndUserLocation = function (user) {
   var apiUrl =
-    "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}" +
-    user +
-    "/repos";
+    "api.openweathermap.org/data/2.5/weather?q=dallas&appid=540f9a4f911b73e2656f8cb8a4cc7555";
 
   fetch(apiUrl)
     .then(function (response) {
@@ -39,9 +37,9 @@ var getEndUserLocation = function (user) {
     });
 };
 
-var displayWeather = function (repos, searchTerm) {
-  if (repos.length === 0) {
-    weatherContainerEl.textContent = "No repositories found.";
+var displayWeather = function (weatherLocation, searchTerm) {
+  if (weatherLocation.length === 0) {
+    weatherContainerEl.textContent = "Nothing to be found.";
     return;
   }
 

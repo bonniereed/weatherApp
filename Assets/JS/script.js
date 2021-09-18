@@ -1,8 +1,8 @@
 //
 var weatherFormEl = document.querySelector("#weather-form");
 var weatherInputEl = document.querySelector("#weather");
-var weatherContainerEl = document.querySelector(".weather-container");
 var weatherSearchTerm = document.querySelector("#weather-search-term");
+var weatherCards = document.querySelector("#weatherCards");
 var key = `540f9a4f911b73e2656f8cb8a4cc7555`;
 var url = `https://api.openweathermap.org/data/2.5/`;
 var units = `imperial`;
@@ -14,7 +14,6 @@ var time;
 var formSubmitHandler = function (event) {
   event.preventDefault();
   getWeatherLocation(weatherInputEl.value.trim());
-  displayWeather();
 };
 
 function getWeatherLocation(city) {
@@ -54,13 +53,24 @@ function getWeatherInfo() {
 }
 
 function displayWeather() {
-  // create a new div element
-  const newDiv = document.createElement("div");
+  // create a new div
+  var newDiv = document.createElement("div");
+  // console.log(cardHeader);
+  var weatherHeaderClassAttr = document.createAttribute("class");
+  // console.log(headerClassAttr);
+  weatherHeaderClassAttr.value = "header";
+  cardHeader.setAttributeNode(weatherHeaderClassAttr);
+  // console.log(cardHeader);
+  var weatherHeaderIdAttr = document.createAttribute("id");
+  weatherHeaderIdAttr.value = "card-heading";
+  weatherCards.setAttributeNode(headerIdAttr);
+  // set h2 title/text
+  weatherCards.innerHTML = name;
+  // Append to containter
+  cardContainer.appendChild(weatherCards);
 
   // and give it some content
-  const newContent = weatherContainerEl.createTextNode(
-    "Hi there and greetings!"
-  );
+  const newContent = weatherContainerEl.innerHTML;
 
   // add the text node to the newly created div
   newDiv.appendChild(newContent);
@@ -69,33 +79,5 @@ function displayWeather() {
   const currentDiv = document.getElementById("weather-container");
   document.body.insertBefore(newDiv, currentDiv);
 }
-
-// var displayWeather = function (weatherLocation, searchTerm) {
-//   if (weatherLocation.length === 0) {
-//     weatherContainerEl.textContent = "Nothing to be found.";
-//     return;
-//   }
-
-//   weatherSearchTerm.textContent = searchTerm;
-
-//   for (var i = 0; i < repos.length; i++) {
-//     // var weatherEntry = repos[i].owner.login + "/" + repos[i].name;
-
-//     weatherContainerEl.document.createElement("card");
-//     weatherContainerEl.classList =
-//       "list-item flex-row justify-space-between align-center";
-//     weatherContainerEl.textContent = `UV Index is:${city_of_choice.current.uvi} /n `;
-
-//     var weatherEl = document.createElement("card");
-//     weatherContainerEl.textContent = weatherEntry;
-
-//     var statusEl = document.createElement("card");
-//     statusEl.classList = "flex-row align-center";
-
-//     weatherEl.appendChild(statusEl);
-
-//     weatherContainerEl.appendChild(repoEl);
-//   }
-// };
 
 weatherFormEl.addEventListener("submit", formSubmitHandler);

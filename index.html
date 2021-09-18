@@ -12,7 +12,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
     />
-    <link rel="stylesheet" href="./Assets/Style/style.css" />
+    <link rel="stylesheet" href="Assets/Style/style.css" />
     <title>Weather On Demand </title>
   </head>
 
@@ -44,11 +44,14 @@
         <h2 class="subtitle">
           Showing Weather Results for: <span id="weather-search-term"></span>
         </h2>
-        <!-- <div id="weather-container" class="list-group"></div> -->
+        <container id="weatherCards">
+          <div class="weatherList"></div>
+
+        </container>
       </div>
     </main>
 
-    <script src="./assets/JS/script.js"></script>
+    <script src="Assets/JS/script.js"></script>
     <div id="weather-container" class="list-group"></div>
   </body>
 </html>

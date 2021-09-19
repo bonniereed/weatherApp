@@ -88,7 +88,9 @@ function displayWeather(location, weatherData) {
     ` Temp: ${city_of_choice_expanded.current.temp}` +
     ` UV Index:  ${city_of_choice_expanded.current.uvi}` +
     ` Sunrise: ${city_of_choice_expanded.current.sunrise}` +
-    ` Sunset: ${city_of_choice_expanded.current.sunset}`;
+    ` Sunset: ${city_of_choice_expanded.current.sunset}` +
+    ` Humidity: ${city_of_choice_expanded.current.humidity} %` +
+    ` Wind speed: ${city_of_choice_expanded.current.wind_speed} MPH"`;
   li3.textContent = `Forecast:`;
   li4.textContent = `${city_of_choice_expanded.hourly[0].weather[0].description}`;
   li5.textContent = `${city_of_choice_expanded.hourly[1].weather[0].description}`;

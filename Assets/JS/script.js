@@ -16,7 +16,7 @@ var city_of_choice_expanded;
 var lat;
 var lon;
 var time;
-
+//creates li for the HTML page
 var li1 = document.createElement("li");
 var li2 = document.createElement("li");
 var li3 = document.createElement("li");
@@ -65,12 +65,6 @@ function getWeatherInfo() {
     })
     .catch(function () {});
 }
-
-// ///forecast:
-// city_of_choice_expanded.current.hourly[0];
-// city_of_choice_expanded.current.hourly[1];
-// city_of_choice_expanded.current.hourly[2];
-// city_of_choice_expanded.current.hourly[3];
 
 //Function used to create cards with weather information to display
 function displayWeather(location, weatherData) {

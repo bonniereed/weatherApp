@@ -113,22 +113,18 @@ p {
   box-shadow: 6px 5px var(--light-dark);
 }
 
-.list-group {
-  padding: 0;
-  list-style: none;
-}
-
-.list-item {
+li {
   margin-bottom: 10px;
   padding: 1.5%;
   border-radius: var(--border-radius);
   background-color: var(--light-dark);
   color: var(--primary);
-  text-decoration: none;
+  list-style-type: none;
 }
-
-.list-item:hover {
-  background-color: var(--dark);
+li1,
+li3 {
+  display: flex;
+  justify-content: center;
 }
 
 .status-icon {
